@@ -341,8 +341,14 @@ class LinkAnnotationElement extends AnnotationElement {
   _bindLink(link, destination) {
     link.href = this.linkService.getDestinationHash(destination);
     link.onclick = () => {
+      var urlParams = new URL(window.location.href).searchParams;
       if (destination) {
-        this.linkService.navigateTo(destination);
+        if (!(urlParams.get("child")==="true")) {
+            $("#frameContainer").show();
+            $("#childFrame")[0].contentWindow.PDFViewerApplication.pdfLinkService.navigateTo(destination);
+        } else {
+            this.pdfLinkService.navigateTo(destination);
+        }
       }
       return false;
     };
