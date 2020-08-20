@@ -1892,6 +1892,7 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
     top:500px;
     width:60%;
     height:30%;
+    display:flex;
 }
 
 #handle {
@@ -1901,14 +1902,12 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
     background-color:rgba(71, 71, 71, 1);
     cursor:move;
     pointer:move;
-    float:left;
 }
 
 #frame {
     width:90%;
     height:100%;
     border:0;
-    float:left;
 }
 
 #childFrame {
