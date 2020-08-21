@@ -13,3 +13,5 @@ references and look at the referenced text in a pop-up window. This hack on
 
 A live version with an example pdf is hosted
 [here](https://pdf.chenyang.co/web/viewer.html?file=https://arxiv.org/pdf/1012.0621.pdf).
+
+Chrome extension available [here](https://github.com/yuanchenyang/pdf.js/releases/tag/chrome-1.0).
