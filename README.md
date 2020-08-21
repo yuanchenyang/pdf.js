@@ -5,8 +5,9 @@ references and look at the referenced text in a pop-up window. This hack on
 [pdf.js](https://github.com/mozilla/pdf.js) implements this functionality:
 
 - Click on any internal link to open a popup window jumping to linked text
-- Resize and drag popup window around by its corners
+- Drag popup window around or resize by dragging on top/bottom-left corners
 - Ctrl/Command-click on a link to jump to it in main window
+- History of previously clicked links stored in sidebar for quick referencing
 
 ![screenshot](docs/screenshot.png)
 
