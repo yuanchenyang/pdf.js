@@ -185,7 +185,36 @@ function getViewerConfiguration() {
   };
 }
 
+function childFrameLoad() {
+    var url = new URL(window.location.href);
+    $("#frameContainer").hide();
+    console.log(window.location.href);
+    if (!(url.searchParams.get("child")==="true")) {
+        $("#frameContainer").draggable({
+            drag: function(event, ui) {
+                return;
+            }
+        }).resizable({
+            handles: "w, sw, nw"
+        });
+
+        if (PDFJSDev.test("CHROME")) {
+            $("#childFrame").attr("src", chrome.extension.getURL("content/web/viewer.html")
+                                  +"?file="
+                                  + url.href.slice(url.origin.length+1)
+                                  + "?child=true");
+        } else {
+            $("#childFrame").attr("src", "/web/viewer.html?child=true&file="
+                                  + url.searchParams.get("file"));
+        }
+        $("#hide").click(function () {
+            $("#frameContainer").toggle();
+        });
+    }
+}
+
 function webViewerLoad() {
+  childFrameLoad();
   const config = getViewerConfiguration();
   if (typeof PDFJSDev === "undefined" || !PDFJSDev.test("PRODUCTION")) {
     Promise.all([

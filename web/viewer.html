@@ -44,7 +44,7 @@ See https://github.com/adobe-type-tools/cmap-resources
     <link rel="resource" type="application/l10n" href="locale/locale.properties">
 <!--#endif-->
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!--#if !PRODUCTION-->
@@ -442,24 +442,5 @@ See https://github.com/adobe-type-tools/cmap-resources
 
     </div> <!-- outerContainer -->
     <div id="printContainer"></div>
-    <script>
-      var urlParams = new URL(window.location.href).searchParams;
-      $("#frameContainer").hide()
-      if (!(urlParams.get("child")==="true")) {
-          $("#frameContainer").draggable({
-              drag: function(event, ui) {
-                  return;
-              }
-          }).resizable({
-              handles: "w, sw, nw"
-          });
-
-          $("#childFrame").attr("src", "/web/viewer.html?child=true&file="
-                                + urlParams.get("file"));
-          $("#hide").click(function () {
-              $("#frameContainer").toggle();
-          })
-      }
-    </script>
   </body>
 </html>
