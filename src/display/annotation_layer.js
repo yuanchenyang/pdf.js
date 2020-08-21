@@ -28,6 +28,7 @@ import {
   unreachable,
   Util,
   warn,
+  isChildWindow,
 } from "../shared/util.js";
 import { AnnotationStorage } from "./annotation_storage.js";
 
@@ -340,18 +341,29 @@ class LinkAnnotationElement extends AnnotationElement {
    */
   _bindLink(link, destination) {
     link.href = this.linkService.getDestinationHash(destination);
-    link.onclick = (event) => {
-      var urlParams = new URL(window.location.href).searchParams;
-      if (destination) {
-        if (!((urlParams.get("child")==="true") || event.ctrlKey || event.metaKey)) {
-            $("#frameContainer").show();
-            $("#childFrame")[0].contentWindow.PDFViewerApplication.pdfLinkService.navigateTo(destination);
-        } else {
-            window.PDFViewerApplication.pdfLinkService.navigateTo(destination);
+
+    function clickEvent(event) {
+        if (destination) {
+            if ( !(isChildWindow() || event.ctrlKey || event.metaKey)) {
+                $("#frameContainer").show();
+                $("#childFrame")[0].contentWindow.PDFViewerApplication.pdfLinkService.navigateTo(destination);
+                var newlink = $(link).clone().append(destination);
+                newlink.click(() => {
+                  $("#childFrame")[0].contentWindow.PDFViewerApplication.pdfLinkService.navigateTo(destination);
+                  return false;
+                });
+                var linkDiv = $("<div class='treeItem'></div>").append(newlink);
+                linkDiv.attr("link-destination", destination);
+                $("#cache-links [link-destination='" + destination + "']").remove();
+                $("#cache-links").prepend(linkDiv);
+            } else {
+                window.PDFViewerApplication.pdfLinkService.navigateTo(destination);
+            }
         }
-      }
-      return false;
+        return false;
     };
+
+    link.onclick = clickEvent;
     if (destination) {
       link.className = "internalLink";
     }

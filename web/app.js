@@ -35,6 +35,9 @@ import {
   SpreadMode,
   TextLayerMode,
 } from "./ui_utils.js";
+import {
+    isChildWindow,
+} from "../src/shared/util.js";
 import { AppOptions, OptionKind } from "./app_options.js";
 import {
   build,
@@ -247,6 +250,11 @@ const PDFViewerApplication = {
     await this._readPreferences();
     await this._parseHashParameters();
     await this._initializeL10n();
+
+    if (isChildWindow()) {
+      AppOptions.set("defaultZoomValue", "page-width");
+      AppOptions.set("sidebarViewOnLoad", SidebarView.NONE);
+    }
 
     if (
       this.isViewerEmbedded &&

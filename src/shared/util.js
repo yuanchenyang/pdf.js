@@ -910,6 +910,11 @@ const createObjectURL = (function createObjectURLClosure() {
   };
 })();
 
+function isChildWindow() {
+    var urlParams = new URL(window.location.href).searchParams;
+    return urlParams.get("child") === "true";
+}
+
 export {
   BaseException,
   FONT_IDENTITY_MATRIX,
@@ -969,4 +974,5 @@ export {
   utf8StringToString,
   warn,
   unreachable,
+  isChildWindow,
 };

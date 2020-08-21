@@ -45,6 +45,7 @@ See https://github.com/adobe-type-tools/cmap-resources
 <!--#endif-->
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!--#if !PRODUCTION-->
     <script defer src="../node_modules/es-module-shims/dist/es-module-shims.js"></script>
@@ -322,8 +323,8 @@ See https://github.com/adobe-type-tools/cmap-resources
 
         <div id="frameContainer">
           <div id="handle">
-            <div id="hide" class="sidebar-row">
-              Hide
+            <button id="hide" class="toolbarButton"><i class="fa fa-times-circle"></i></button>
+            <div class="treeItems" id="cache-links">
             </div>
           </div>
           <div id="frame">
